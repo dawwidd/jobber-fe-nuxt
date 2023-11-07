@@ -11,18 +11,25 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+          { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css'}],
   },
 
   server: {
     port: 8000
   },
 
+  buildModules: [
+    '@nuxtjs/vuetify',
+    ['@nuxtjs/vuetify']
+  ],
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    '~/plugins/axios'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -34,8 +41,44 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  axios: {
+    baseUrl: 'http://localhost:3000',
+    credentials: true
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        scheme: 'refresh',
+        token: {
+          required: false,
+          type: false
+        },
+        // refreshToken: {
+        //   property: 'refreshToken',
+        //   data: 'refreshToken',
+        //   maxAge: 60 * 60 * 24
+        // },
+        endpoints: {
+          login: { url: 'auth/login', method: 'post' },
+          user: { url: 'auth', method: 'get', propertyName: 'data' },
+          // refresh: { url: 'auth/refresh', method: 'get' },
+          logout: { url: 'auth/logout', method: 'post'}
+        }
+      }
+    },
+    redirect: {
+      login: '/login',
+      logout: '/',
+      home: '/'
+    }
+  }
 }
