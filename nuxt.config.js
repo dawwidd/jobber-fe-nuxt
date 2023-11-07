@@ -11,8 +11,7 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-          { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css'}],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   server: {
@@ -24,11 +23,14 @@ export default {
     ['@nuxtjs/vuetify']
   ],
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    'bootstrap/dist/css/bootstrap.css'
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/axios'
+    '~/plugins/axios',
+    '~/plugins/bootstrap-vue'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

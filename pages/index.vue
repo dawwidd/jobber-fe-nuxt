@@ -1,9 +1,7 @@
 <template>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">Jobber</h1>
-    </div>
-  </section>
+  <div class="container py-4">
+    <h1>Jobber</h1>
+  </div>
 </template>
 
 <script lang="ts">

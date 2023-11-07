@@ -1,26 +1,26 @@
 <template>
-  <nav class="navbar is-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <div class="navbar-brand">
-        <nuxt-link class="navbar-item" to="/">Jobber</nuxt-link>
-      </div>
-      <div class="navbar-menu">
-        <div class="navbar-end">
-          <div class="navbar-item has-dropdown is-hoverable" v-if="isAuthenticated">
-            <a class="navbar-link">
-              {{ loggedInUser.email }}
-            </a>
-            <div class="navbar-dropdown">
-              <nuxt-link class="navbar-item" to="/profile">My Profile</nuxt-link>
-              <hr class="navbar-divider"/>
-              <a class="navbar-item" @click="logout">Logout</a>
-            </div>
-          </div>
-          <template v-else>
-            <nuxt-link class="navbar-item" to="/register">Register</nuxt-link>
-            <nuxt-link class="navbar-item" to="/login">Log In</nuxt-link>
-          </template>
-        </div>
+      <nuxt-link class="navbar-brand" to="/">Jobber</nuxt-link>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item" v-if="!isAuthenticated">
+            <nuxt-link class="nav-link" to="/register">Register</nuxt-link>
+          </li>
+          <li class="nav-item" v-if="!isAuthenticated">
+            <nuxt-link class="nav-link" to="/login">Log In</nuxt-link>
+          </li>
+          <li v-if="isAuthenticated" class="nav-item dropdown">
+            <b-dropdown :text="loggedInUser.email" type="light" variant="light">
+              <b-dropdown-item to="/profile">My Profile</b-dropdown-item>
+              <b-dropdown-divider></b-dropdown-divider>
+              <b-dropdown-item @click.prevent="logout">Logout</b-dropdown-item>
+            </b-dropdown>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -36,13 +36,9 @@ export default {
 
   methods: {
     async logout() {
-      await this.$auth.logout()
-      this.$router.push('/login')
+      await this.$auth.logout();
+      this.$router.push('/login');
     }
   }
 }
 </script>
-
-<style>
-
-</style>

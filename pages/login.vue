@@ -1,45 +1,41 @@
 <template>
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-4 is-offset-4">
-          <h2 class="title has-text-centered">Login</h2>
+  <section class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <h2 class="text-center mb-3">Login</h2>
 
-          <Notification :message="error" v-if="error"/>
+        <Notification :message="error" v-if="error" />
 
-          <form method="post" @submit.prevent="login">
-            <div class="field">
-              <label class="label">Email</label>
-              <div class="control">
-                <input
-                  type="email"
-                  class="input"
-                  name="email"
-                  v-model="email"
-                  required
-                />
-              </div>
-            </div>
-            <div class="field">
-              <label class="label">Password</label>
-              <div class="control">
-                <input
-                  type="password"
-                  class="input"
-                  name="password"
-                  v-model="password"
-                  required
-                />
-              </div>
-            </div>
-            <div class="control">
-              <button type="submit" class="button is-dark is-fullwidth">Login</button>
-            </div>
-          </form>
-
-          <div class="has-text-centered" style="margin-top: 20px">
-            Don't have an account? <nuxt-link to="/register">Register</nuxt-link>
+        <form @submit.prevent="login">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              v-model="email"
+              required
+            />
           </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              v-model="password"
+              required
+            />
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-dark">Login</button>
+          </div>
+        </form>
+
+        <div class="text-center mt-3">
+          Don't have an account? <nuxt-link to="/register">Register</nuxt-link>
         </div>
       </div>
     </div>
@@ -69,8 +65,8 @@ export default {
       try {
         await this.$auth.loginWith('local', {
           data: {
-          email: this.email,
-          password: this.password
+            email: this.email,
+            password: this.password
           },
         });
 
