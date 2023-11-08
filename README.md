@@ -2,7 +2,7 @@
 
 ## Description
 
-This is frontend for a simple app to track all the job you applied to during your job hunt. WIP
+This is frontend for a simple app to track all the job applications you made or offers you got during your job hunt. WIP
 
 Backend/API for the app can be found at: https://github.com/dawwidd/jobber-be
 
